@@ -10,13 +10,17 @@ using IConnection connection = factory.CreateConnection(); // disposable olduğu
 using IModel channel = connection.CreateModel(); // disposable olduğu için using, kanal oluşturduk
 
 // Kuyruk oluşturma
-channel.QueueDeclare(queue: "sample-queue", exclusive: false); // exclusive true olsaydı, consumer bu kuyruğa erişemeden bu kuyruk silinmiş olacaktı
+channel.QueueDeclare(queue: "sample-queue", exclusive: false, durable:true); // exclusive true olsaydı, consumer bu kuyruğa erişemeden bu kuyruk silinmiş olacaktı.
+                                                                             // durable property'si ise kuyruğu kalıcı hale getirmeyi sağlar.
+                                                                             // durable property, hem publisher'da hem de consumer'da aynı olmalıdır!
+
+IBasicProperties properties = channel.CreateBasicProperties();
 
 // Kuyruğa mesaj gönderme
 for (int i = 0; i < 120; i++)
 {
     var message = Encoding.UTF8.GetBytes("Hello world "+i);
-    channel.BasicPublish(exchange: "", routingKey: "sample-queue", body: message);
+    channel.BasicPublish(exchange: "", routingKey: "sample-queue", body: message, basicProperties: properties);
 
 }
 

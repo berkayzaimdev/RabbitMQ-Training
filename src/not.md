@@ -53,3 +53,11 @@
 ### Binding nedir?
 
 - Exchange ile kuyruk arasında bağlantı oluşturmayı ifade eder. Bir exchange birden fazla kuyruğa bağlanabilir.
+
+### Message Acknowledgement
+
+- RabbitMQ, consumer'a gönderdiği mesajı başarılı bir şekilde işlensin veya işlenmesin; **hemen kuyruktan silinmesi** üzerine işaretler.
+- Bu durumu önlemek için işleme sonucunda consumer'ın RabbitMQ'yı uyarması gerekir. (oney bildirisi gelene kadar bekle, gibi)
+- Bu özelliği kullanırken; mesaj işlenemeden consumer problem yaşarsa bu mesajın sağlıklı bir şekilde işlenebilmesi için başka bir consumer tarafından tüketilebilir olmasına, mesaj işleme şayet sonlanırsa RabbitMQ'ye mesajın artık silinebileceğine dair haber göndermesine dikkat edilmelidir. Aksi takdirde mesaj birden çok kez işlenebilir. Ayrıca kuyrukta mesaj birikirse performans sorunları ortaya çıkabilir.
+- Consumer'dan gelecek olan onay için zaman aşımı süresi default olarak 30 dk.'dır
+- Bu süre zarfında bir bildirim gelmezse RabbitMQ mesajı tekrar yayınlar.
