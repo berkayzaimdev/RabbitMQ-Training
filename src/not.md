@@ -61,3 +61,20 @@
 - Bu özelliği kullanırken; mesaj işlenemeden consumer problem yaşarsa bu mesajın sağlıklı bir şekilde işlenebilmesi için başka bir consumer tarafından tüketilebilir olmasına, mesaj işleme şayet sonlanırsa RabbitMQ'ye mesajın artık silinebileceğine dair haber göndermesine dikkat edilmelidir. Aksi takdirde mesaj birden çok kez işlenebilir. Ayrıca kuyrukta mesaj birikirse performans sorunları ortaya çıkabilir.
 - Consumer'dan gelecek olan onay için zaman aşımı süresi default olarak 30 dk.'dır
 - Bu süre zarfında bir bildirim gelmezse RabbitMQ mesajı tekrar yayınlar.
+
+---
+# ESB
+
+### ESB(Enterprise Server Bus) nedir?
+
+- Servisler arası entegrasyon sağlayan komponentlerin bütünüdür.
+- RabbitMQ gibi farklı sistemlerin birbirleriyle etkileşime girmesini sağlayan teknolojilerin kullanımını ve yönetimini kolaylaştıran bir trans.
+- Örneğin: RabbitMQ'dan Kafka'ya geçişi kolaylaştırır
+
+### MassTransit nedir?
+
+- .NET için geliştirilmiş olan, dağıtık sistemleri kolaylıkla yönetmeyi ve çalıştırmayı amaçlayan bir Transport Gateway'dir.
+   - Transport Gateway, farklı sistemler arasında farklı iletişim protokollerini kullanarak iletişim kurmayı amaçlayan bir araçtır.
+   - Bu araç ile iletişim protokollerindeki farklılıklar gizlenerek, sorunsuz bir iletişim hedeflenmektedir.
+- Messaging tabanlı, loosely-coupled ve asenkron olarak tasarlanmış dağıtık sistemlerde yüksek dereceli kullanılabilirlik, güvenilirlik ve ölçeklenebilirlik sağlayabilmek için servisler oluşturmayı son derece kolaylaştırmaktadır.
+- Uygulamanın message broker bağımlılığını ortadan kaldırmak için tercih edilebilir.
